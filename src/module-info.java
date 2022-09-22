@@ -1,0 +1,2 @@
+module adt_Bags {
+}
