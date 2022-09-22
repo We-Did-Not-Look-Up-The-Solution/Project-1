@@ -1,0 +1,202 @@
+package project1.bags;
+
+import java.util.Arrays;
+
+public class ResizableArrayBag<T> implements BagInterface<T> {
+
+	private final T[] bag; // Was final, but doubleCapacity needs this to be changeable
+	private static final int DEFAULT_CAPCITY = 20;
+	private int numberOfEntries;
+	private boolean integrityOK = false;
+	private static final int MAX_CAPACITY = 10000;
+	
+	public ResizableArrayBag() {
+		this(DEFAULT_CAPCITY);
+	}
+	
+	public ResizableArrayBag(int capacity) {
+		if (capacity <= MAX_CAPACITY) {
+			
+			@SuppressWarnings("unchecked")
+			T[] tempBag = (T[]) new Object[capacity]; // All classes are objects
+			bag = tempBag;
+			numberOfEntries = 0;
+			integrityOK = true;
+		} else {
+			throw new IllegalStateException("Attempted to create a bag whose capacity exceeds allowed maximum.");
+		}
+	}
+	
+	private void checkIntegrity() {
+		if (!integrityOK) throw new SecurityException("ArrayBag object is corrupt");
+	}
+	
+	/**
+	 * Returns the current size of this bag
+	 */
+	public int getCurrentSize() {
+		return numberOfEntries;
+	}
+	
+	/**
+	 * Get whether this bag is Empty
+	 * 
+	 * @return Whether the number of Entries is 0
+	 */
+	public boolean isEmpty() {
+		return numberOfEntries == 0;
+	}
+	
+	/**
+	 * Add an entry to this bag.
+	 * @return True if successful; False if unsuccessful.
+	 */
+	public boolean add(T newEntry) {
+		checkIntegrity();
+		boolean wasAdded = true;
+		if (isFull()) {
+			wasAdded = false;
+		} else {
+			bag[numberOfEntries] = newEntry;
+			numberOfEntries++;
+		}
+		
+		return wasAdded;
+	}
+
+	/**
+	 * Removes an unspecified entry in the bag (The last one/most recent entry)
+	 * @return True if successful; False if unsuccessful
+	 */
+	public T remove() {
+		checkIntegrity();
+		T result = removeEntry(numberOfEntries - 1);
+		return result;
+	}
+
+	public boolean remove(T entry) {
+		checkIntegrity();
+		int index = getIndexOf(entry);
+		T result = removeEntry(index);
+		return entry.equals(result); // if the removed item is equal to the one in the argument, return true
+	}
+	
+	/**
+	 * A helper method that removes the object at the specified index, 
+	 * filling that index with the object in the last index, then making the last index null
+	 * 
+	 * @param index
+	 * @return
+	 */
+	private T removeEntry(int index) {
+		T result = null;
+		if (!this.isEmpty() && index >= 0) {
+			result = bag[index];
+			bag[index] = bag[numberOfEntries - 1];
+			bag[numberOfEntries - 1] = null;
+			numberOfEntries--;
+		}
+		return result;
+	}
+	
+	/**
+	 * Removes all entries from this bag
+	 */
+	public void clear() {
+		while (!isEmpty())
+			remove();
+	}
+	
+	/**
+	 * Tests whether this bag contains a given entry
+	 * @param anEntry : The Entry to locate
+	 * @return True if this bag contains anEntry, false otherwise
+	 */
+	public boolean contains(T anEntry) {
+		checkIntegrity();
+		return getIndexOf(anEntry) > -1;
+	}
+	
+	public int getFrequencyOf(Object anEntry) {
+		checkIntegrity();
+		int count = 0;
+		for (int i = 0; i < numberOfEntries; i++) {
+			if (bag[i].equals(anEntry)) count++;
+		}
+		return count;
+	}
+	
+	/**
+	 * Makes a copy of this bag
+	 * @return Copy of this bag
+	 */
+	public T[] toArray() {
+		@SuppressWarnings("unchecked")
+		T[] arrayResult = (T[]) new Object[this.numberOfEntries];
+		for (int i = 0; i < numberOfEntries; i++) {
+			arrayResult[i] = bag[i];
+		}
+		return arrayResult;
+	}
+	
+	public Object union(Object unionTarget) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object intersection(Object intersectTarget) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	
+	/*
+	private void doubleCapacity() {
+		int newLength = bag.length * 2;
+		//checkCapacity();
+		bag = Arrays.copyOf(bag, newLength);
+	}
+	*/
+
+	
+	/**
+	 * Get whether this bag is full or not
+	 * 
+	 * @return Whether the number of entries is equal to the Capacity of this bag
+	 */
+	public boolean isFull() {
+		return numberOfEntries == bag.length;
+	}
+	
+	/**
+	 * Finds the index of the entry in this bag.
+	 * @param anEntry
+	 * @return Index of entry if found, otherwise -1
+	 */
+	private int getIndexOf(T anEntry) {
+		int posOfEntry = -1;
+		boolean isFound = false;
+		int index =0;
+		
+		while (!isFound && (index < numberOfEntries)) {
+			if (anEntry.equals(bag[index])) {
+				isFound = true;
+				posOfEntry = index;
+			}
+			index++;
+		}
+		return posOfEntry;
+	}
+	
+	/**
+	 * Getter for this bag array. 
+	 * <b>Remember that it is final, so it cannot be changed, but its content can
+	 * 
+	 * @return
+	 */
+	public T[] getBagArray() {
+		return this.bag;
+	}
+	
+}

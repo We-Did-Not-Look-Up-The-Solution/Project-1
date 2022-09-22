@@ -1,14 +1,16 @@
-package java.io.carlthespiny.bags;
+package project1.bags;
 
-public interface IBag<T> {
+public interface BagInterface<T> {
 
 	int getCurrentSize();
 
 	boolean isEmpty();
+	
+	public boolean isFull();
 
 	boolean add(T newEntry);
 
-	boolean remove();
+	T remove();
 
 	boolean remove(T entry);
 
