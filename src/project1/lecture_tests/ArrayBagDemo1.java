@@ -1,19 +1,19 @@
-package project1.tests;
+package project1.lecture_tests;
 
 import project1.bags.BagInterface;
-import project1.bags.ResizableArrayBag;
+import project1.bags.ArrayBag;
 
 public class ArrayBagDemo1 {
 
 	public static void main(String[] args) {
-		BagInterface<String> aBag = new ResizableArrayBag<String>();
+		BagInterface<String> aBag = new ArrayBag<String>();
 		testIsFull(aBag, false);
 		
 		String[] contentsOfBag1 = {"A", "A", "B", "A", "C", "A"};
 		testAdd(aBag, contentsOfBag1);
 		testIsFull(aBag, false);
 		
-		aBag = new ResizableArrayBag<String>(7);
+		aBag = new ArrayBag<String>(7);
 		System.out.println("\nA new emty bag:");
 		
 		testIsFull(aBag, false);

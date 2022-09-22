@@ -2,19 +2,19 @@ package project1.bags;
 
 import java.util.Arrays;
 
-public class ResizableArrayBag<T> implements BagInterface<T> {
+public class ArrayBag<T> implements BagInterface<T> {
 
-	private final T[] bag; // Was final, but doubleCapacity needs this to be changeable
+	private T[] bag; // Was final, but doubleCapacity needs this to be changeable
 	private static final int DEFAULT_CAPCITY = 20;
 	private int numberOfEntries;
 	private boolean integrityOK = false;
 	private static final int MAX_CAPACITY = 10000;
 	
-	public ResizableArrayBag() {
+	public ArrayBag() {
 		this(DEFAULT_CAPCITY);
 	}
 	
-	public ResizableArrayBag(int capacity) {
+	public ArrayBag(int capacity) {
 		if (capacity <= MAX_CAPACITY) {
 			
 			@SuppressWarnings("unchecked")
@@ -55,13 +55,23 @@ public class ResizableArrayBag<T> implements BagInterface<T> {
 		checkIntegrity();
 		boolean wasAdded = true;
 		if (isFull()) {
-			wasAdded = false;
-		} else {
-			bag[numberOfEntries] = newEntry;
-			numberOfEntries++;
+			doubleCapacity();
 		}
+		bag[numberOfEntries] = newEntry;
+		numberOfEntries++;
 		
 		return wasAdded;
+	}
+	
+	private void checkCapacity(int capacity) {
+		if (capacity > MAX_CAPACITY)
+			throw new IllegalStateException("Attempted to make a bag whose capacity excedds allowed max of " + MAX_CAPACITY);
+	}
+	
+	private void doubleCapacity() {
+		int newLength = 2 * bag.length;
+		checkCapacity(newLength);
+      	this.bag = Arrays.copyOf(bag, newLength);
 	}
 
 	/**
