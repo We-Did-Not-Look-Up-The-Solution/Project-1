@@ -12,11 +12,11 @@ public class ArrayBag<T> implements BagInterface<T> {
 	
 	public ArrayBag() {
 		this(DEFAULT_CAPCITY);
+		
 	}
 	
 	public ArrayBag(int capacity) {
 		if (capacity <= MAX_CAPACITY) {
-			
 			@SuppressWarnings("unchecked")
 			T[] tempBag = (T[]) new Object[capacity]; // All classes are objects
 			bag = tempBag;
@@ -65,7 +65,7 @@ public class ArrayBag<T> implements BagInterface<T> {
 	
 	private void checkCapacity(int capacity) {
 		if (capacity > MAX_CAPACITY)
-			throw new IllegalStateException("Attempted to make a bag whose capacity excedds allowed max of " + MAX_CAPACITY);
+			throw new IllegalStateException("Attempted to make a bag whose capacity exceeds allowed max of " + MAX_CAPACITY);
 	}
 	
 	private void doubleCapacity() {
@@ -149,26 +149,35 @@ public class ArrayBag<T> implements BagInterface<T> {
 		return arrayResult;
 	}
 	
-	public Object union(Object unionTarget) {
+	/**
+	 * Unite two bags together
+	 * Array does not need to be in order; can have empty slots anywhere
+	 * @param arrayToUnite
+	 * @return new bag if union was successful, else throw exception (Null should never be returned)
+	 */
+	public T[] union(T[] arrayToUnite) {
+		checkIntegrity(); // Verify
+		checkCapacity(arrayToUnite.length + this.numberOfEntries); // Check Capacity (Don't actually know numberOfEntries, so worst case is the array has 1 entry)
+		ArrayBag<T> result = this; // Copy of this bag (Contents of both bags should not change)
+			
+		for (int index = 0; index < arrayToUnite.length; index++) { 
+			// Iterate through this array (We use the length instead of numOfEntries, as array can be out of order, like having empty slots before filled ones)
+			if (arrayToUnite[index] != null) // If the current slot is not empty
+				result.add(arrayToUnite[index]); // Add slot contents to the bag (using add method, which will auto-resize bag if new entry doesn't fit)
+		}
+		
+		return result.toArray(); // Can never return this bag w/o changes (Failsafes in place)
+	}
+
+	public T[] intersection(T[] intersectTarget) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	public Object intersection(Object intersectTarget) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
 	
-	/*
-	private void doubleCapacity() {
-		int newLength = bag.length * 2;
-		//checkCapacity();
-		bag = Arrays.copyOf(bag, newLength);
+	public T[] diference(T[] differenceTarget) {
+		// TODO Auto-generated method stub
+		return null;
 	}
-	*/
-
 	
 	/**
 	 * Get whether this bag is full or not
@@ -208,5 +217,4 @@ public class ArrayBag<T> implements BagInterface<T> {
 	public T[] getBagArray() {
 		return this.bag;
 	}
-	
 }

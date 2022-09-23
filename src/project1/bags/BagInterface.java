@@ -7,7 +7,7 @@ public interface BagInterface<T> {
 	boolean isEmpty();
 	
 	public boolean isFull();
-
+	
 	boolean add(T newEntry);
 
 	T remove();
@@ -35,7 +35,7 @@ public interface BagInterface<T> {
 	 * @param unionTarget
 	 * @return
 	 */
-	T union(T unionTarget);
+	T[] union(T[] unionTarget);
 
 	/**
 	 * Takes a IBag and returns a bag with only T that occurred in both
@@ -47,6 +47,7 @@ public interface BagInterface<T> {
 	 * @param intersectTarget
 	 * @return
 	 */
-	T intersection(T intersectTarget);
+	T[] intersection(T[] intersectTarget);
 
+	T[] diference(T[] differenceTarget);
 }
