@@ -194,4 +194,22 @@ public class LinkedBag<T> implements BagInterface<T> {
 	public boolean isFull() {
 		throw new UnsupportedOperationException("Method not supported");
 	}
+
+	@Override
+	public BagInterface<T> union(BagInterface<T> bag) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public BagInterface<T> intersection(BagInterface<T> bag) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public BagInterface<T> difference(BagInterface<T> bag) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

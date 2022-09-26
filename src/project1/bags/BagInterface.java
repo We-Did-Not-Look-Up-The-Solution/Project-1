@@ -35,19 +35,7 @@ public interface BagInterface<T> {
 	 * @param unionTarget
 	 * @return
 	 */
-	T[] union(T[] unionTarget);
-
-	/**
-	 * Takes a IBag and returns a bag with only T that occurred in both
-	 * 
-	 * If Bag1 has carrot, cheese, napkins
-	 * and Bag2 has cheese, cheese, apple, milk,
-	 * then the bag returned has only cheese
-	 * 
-	 * @param intersectTarget
-	 * @return
-	 */
-	T[] intersection(T[] intersectTarget);
-
-	T[] diference(T[] differenceTarget);
+public BagInterface<T> union(BagInterface<T> bag);
+public BagInterface<T> intersection(BagInterface<T> bag);
+public BagInterface<T> difference(BagInterface<T> bag);
 }
