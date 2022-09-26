@@ -217,4 +217,29 @@ public class ArrayBag<T> implements BagInterface<T> {
 	public T[] getBagArray() {
 		return this.bag;
 	}
+
+	@Override
+	public BagInterface<T> union(BagInterface<T> bag) {
+		BagInterface<T> output = new ArrayBag<T>();
+
+		return null;
+	}
+
+	@Override
+	public BagInterface<T> intersection(BagInterface<T> bag) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public BagInterface<T> difference(BagInterface<T> bag) {
+
+		BagInterface<T> output = new ArrayBag<T>();
+		T[] bag1 =this.toArray();
+		T[] bag2 = bag.toArray();
+
+		output.add((T) "amongus");
+
+		return output;
+	}
 }
