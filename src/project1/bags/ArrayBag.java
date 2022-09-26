@@ -238,8 +238,6 @@ public class ArrayBag<T> implements BagInterface<T> {
 		T[] bag1 =this.toArray();
 		T[] bag2 = bag.toArray();
 
-		output.add((T) "amongus");
-
 		return output;
 	}
 }
