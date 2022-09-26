@@ -20,9 +20,9 @@ public class BagDriver {
 		bag2.add("19 dollar fortnite card");
 		System.out.println(Arrays.toString(bag1.toArray()));
 
-		BagInterface<String>bag3 = bag1.union(bag2);
+		BagInterface<String>adtbag = bag1.union(bag2);
 
-		System.out.println(Arrays.toString(bag3.toArray()));
+		System.out.println(Arrays.toString(adtbag.toArray()));
 	}
 	
 	
