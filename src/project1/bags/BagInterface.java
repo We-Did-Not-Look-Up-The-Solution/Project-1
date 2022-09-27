@@ -35,7 +35,9 @@ public interface BagInterface<T> {
 	 * @param unionTarget
 	 * @return
 	 */
-public BagInterface<T> union(BagInterface<T> bag);
-public BagInterface<T> intersection(BagInterface<T> bag);
-public BagInterface<T> difference(BagInterface<T> bag);
+	public BagInterface<T> union(BagInterface<T> bag);
+	
+	public BagInterface<T> intersection(BagInterface<T> bag);
+	
+	public BagInterface<T> difference(BagInterface<T> bag);
 }
