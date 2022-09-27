@@ -1,7 +1,6 @@
 package project1.tests;
 
 import java.util.Arrays;
-import java.util.LinkedList;
 
 import project1.bags.ArrayBag;
 import project1.bags.BagInterface;
@@ -27,16 +26,23 @@ public class BagDriver {
 		linkedbag1.add("b");;
 		linkedbag1.add("c");;
 		LinkedBag<String>linkedbag2= new LinkedBag<String>();
-		linkedbag1.add("b");
-		linkedbag1.add("b");;
-		linkedbag1.add("d");
-		linkedbag1.add("e");
+		linkedbag2.add("b");
+		linkedbag2.add("b");;
+		linkedbag2.add("d");
+		linkedbag2.add("e");
 		
-		System.out.println(Arrays.toString(bag1.toArray()));
+		System.out.println("Content of Bag1: " + Arrays.toString(bag1.toArray())); // Bag 1
+		System.out.println("Content of Bag2: " + Arrays.toString(bag2.toArray()) + "\n");
+		System.out.println("Content of Linked Bag1: " + Arrays.toString(linkedbag1.toArray()));
+		System.out.println("Content of Linked Bag2: " + Arrays.toString(linkedbag2.toArray()) + "\n");
 
-		BagInterface<String>adtbag = bag1.union(bag2);
 
-		System.out.println(Arrays.toString(bag2.toArray()));
+		BagInterface<String> arrayADTBag = bag1.union(bag2); // Perform Union on Bag 
+		BagInterface<String> linkedADTBag = linkedbag1.union(linkedbag2); // Perform union on Linked Bag
+
+		
+		System.out.println("Result of union on Bag1: " + Arrays.toString(arrayADTBag.toArray()));
+		System.out.println("Result of union on LinkedBag1: " + Arrays.toString(linkedADTBag.toArray()));
 	}
 	
 	

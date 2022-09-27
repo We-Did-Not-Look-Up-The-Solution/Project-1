@@ -154,7 +154,7 @@ public class ArrayBag<T> implements BagInterface<T> {
 	 * Array does not need to be in order; can have empty slots anywhere
 	 * @param arrayToUnite
 	 * @return new bag if union was successful, else throw exception (Null should never be returned)
-	 */
+	 *
 	public T[] union(T[] arrayToUnite) {
 		checkIntegrity(); // Verify
 		checkCapacity(arrayToUnite.length + this.numberOfEntries); // Check Capacity (Don't actually know numberOfEntries, so worst case is the array has 1 entry)
@@ -167,7 +167,31 @@ public class ArrayBag<T> implements BagInterface<T> {
 		}
 		
 		return result.toArray(); // Can never return this bag w/o changes (Failsafes in place)
+	}*/
+	
+	/**
+	 * Union of two bags using BagInterface<T> instead of an array
+	 * Array does not need to be in order; can have empty slots anywhere
+	 * @param bag
+	 * @return new bag if union was successful, else throw exception (Null should never be returned)
+	 */
+	@Override
+	public BagInterface<T> union(BagInterface<T> bag) {
+		checkIntegrity();
+		checkCapacity(bag.getCurrentSize() + this.getCurrentSize());
+		ArrayBag<T> result = this;
+		T[] temp = bag.toArray();
+		
+		for (int index = 0; index < bag.getCurrentSize(); index++) {
+			if (temp[index] != null) {
+				result.add(temp[index]);
+			}
+		}
+
+		return result;
 	}
+	
+	
 
 	public T[] intersection(T[] intersectTarget) {
 		// TODO Auto-generated method stub
@@ -216,13 +240,6 @@ public class ArrayBag<T> implements BagInterface<T> {
 	 */
 	public T[] getBagArray() {
 		return this.bag;
-	}
-
-	@Override
-	public BagInterface<T> union(BagInterface<T> bag) {
-		BagInterface<T> output = new ArrayBag<T>();
-
-		return null;
 	}
 
 	@Override

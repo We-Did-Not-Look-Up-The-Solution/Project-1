@@ -134,19 +134,39 @@ public class LinkedBag<T> implements BagInterface<T> {
 	} // End contains
 
 	/**
-	 * Unites 2 LinkedBags together
+	 * Unites 2 LinkedBags together using Arrays
 	 * Array does need to be in order; Can have null/empty spots
 	 * @param unionTarget the array to unite with this one
 	 * @return New bag as an array, else this LinkedBag is returned
-	 */
+	 *
 	public T[] union(T[] unionTarget) {
 		LinkedBag<T> result = this;
 		
-		for (int index = 0; index < numberOfEntries; index++) {
+		for (int index = 0; index < unionTarget.getCurrentSize(); index++) {
 			if (unionTarget[index] != null)
 				result.add(unionTarget[index]);
 		}
 		return result.toArray();
+	}
+	*/
+	
+	/**
+	 * Unites 2 LinkedBags together using BagInterface
+	 * Array does need to be in order; Can have null/empty spots
+	 * @param bag the array to unite with this one
+	 * @return New bag as an array, else this LinkedBag is returned
+	 */
+	@Override
+	public BagInterface<T> union(BagInterface<T> bag) {
+		LinkedBag<T> result = this;
+		T[] temp = bag.toArray();
+		
+		for (int index = 0; index < bag.getCurrentSize(); ++index) {
+			if (temp[index] != null) {
+				result.add(temp[index]);
+			}
+		}
+		return result;
 	}
 
 	public T[] intersection(T[] intersectTarget) {
@@ -193,12 +213,6 @@ public class LinkedBag<T> implements BagInterface<T> {
 	@Override
 	public boolean isFull() {
 		throw new UnsupportedOperationException("Method not supported");
-	}
-
-	@Override
-	public BagInterface<T> union(BagInterface<T> bag) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
