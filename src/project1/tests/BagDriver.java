@@ -19,7 +19,7 @@ public class BagDriver {
 		bag2.add("b");
 		bag2.add("b");
 		bag2.add("d");
-		bag2.add("e");
+		bag2.add("c");
 
 		LinkedBag<String>linkedbag1= new LinkedBag<String>();
 		linkedbag1.add("a");
@@ -29,7 +29,7 @@ public class BagDriver {
 		linkedbag2.add("b");
 		linkedbag2.add("b");;
 		linkedbag2.add("d");
-		linkedbag2.add("e");
+		linkedbag2.add("c");
 		
 		System.out.println("Content of Bag1: " + Arrays.toString(bag1.toArray())); // Bag 1
 		System.out.println("Content of Bag2: " + Arrays.toString(bag2.toArray()) + "\n");
@@ -40,12 +40,18 @@ public class BagDriver {
 
 		BagInterface<String> arrayADTBag = bag1.union(bag2); // Perform Union on Bag 
 		BagInterface<String> linkedADTBag = linkedbag1.union(linkedbag2); // Perform union on Linked Bag
-
 		
 		System.out.println("Result of union on Bag1: " + Arrays.toString(arrayADTBag.toArray()));
 		System.out.println("Result of union on LinkedBag1: " + Arrays.toString(linkedADTBag.toArray()));
+		System.out.println();
 		
-		System.out.println("Contents of the Bags again ====================================");
+		arrayADTBag = bag1.intersection(bag2);
+		linkedADTBag = linkedbag1.intersection(linkedbag2);
+		
+		System.out.println("Result of intersection on Bag1: " + Arrays.toString(arrayADTBag.toArray()));
+		System.out.println("Result of intersection on LinkedBag1: " + Arrays.toString(linkedADTBag.toArray()));
+		
+		System.out.println("\nContents of the Bags again ====================================");
 		System.out.println("Content of Bag1: " + Arrays.toString(bag1.toArray())); // Bag 1
 		System.out.println("Content of Bag2: " + Arrays.toString(bag2.toArray()) + "\n");
 		

@@ -169,9 +169,17 @@ public class LinkedBag<T> implements BagInterface<T> {
 		return result;
 	}
 
-	public T[] intersection(T[] intersectTarget) {
-		// TODO Auto-generated method stub
-		return null;
+	public BagInterface<T> intersection(BagInterface<T> intersectTarget) {
+		T[] tempArr = toArray();
+		BagInterface<T> newBag = new LinkedBag<T>();
+
+		for (T entry : tempArr) {
+			if (intersectTarget.contains(entry)) {
+				newBag.add(entry);
+				intersectTarget.remove(entry);
+			}
+		}
+		return newBag;
 	}
 
 	public T[] diference(T[] differenceTarget) {
@@ -213,12 +221,6 @@ public class LinkedBag<T> implements BagInterface<T> {
 	@Override
 	public boolean isFull() {
 		throw new UnsupportedOperationException("Method not supported");
-	}
-
-	@Override
-	public BagInterface<T> intersection(BagInterface<T> bag) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

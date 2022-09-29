@@ -59,7 +59,6 @@ public class ArrayBag<T> implements BagInterface<T> {
 		}
 		bag[numberOfEntries] = newEntry;
 		numberOfEntries++;
-		
 		return wasAdded;
 	}
 	
@@ -192,15 +191,22 @@ public class ArrayBag<T> implements BagInterface<T> {
 	}
 	
 	
-
-	public T[] intersection(T[] intersectTarget) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	public T[] diference(T[] differenceTarget) {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * Returns a bag containing all items found in both bags
+	 * @author
+	 * @return new bag with intersection performed on it
+	 */
+	public BagInterface<T> intersection(BagInterface<T> givenBag) {
+		BagInterface<T> newBag = new ArrayBag<T>();
+		for (T entry : bag) {
+			if (entry != null) {
+				if (givenBag.contains(entry)) {
+					newBag.add(entry);
+					givenBag.remove(entry);
+				} 
+			}
+		}
+		return newBag;
 	}
 	
 	/**
@@ -223,11 +229,15 @@ public class ArrayBag<T> implements BagInterface<T> {
 		int index =0;
 		
 		while (!isFound && (index < numberOfEntries)) {
-			if (anEntry.equals(bag[index])) {
-				isFound = true;
-				posOfEntry = index;
+			if (anEntry != null) {
+				if (anEntry.equals(bag[index])) {
+					isFound = true;
+					posOfEntry = index;
+				}
+				index++;
+			} else {
+				throw new NullPointerException("The entry is null, may be an empty an entry in the array...");
 			}
-			index++;
 		}
 		return posOfEntry;
 	}
@@ -240,12 +250,6 @@ public class ArrayBag<T> implements BagInterface<T> {
 	 */
 	public T[] getBagArray() {
 		return this.bag;
-	}
-
-	@Override
-	public BagInterface<T> intersection(BagInterface<T> bag) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
