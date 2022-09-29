@@ -153,15 +153,15 @@ public class LinkedBag<T> implements BagInterface<T> {
 	/**
 	 * Unites 2 LinkedBags together using BagInterface
 	 * Array does need to be in order; Can have null/empty spots
-	 * @param bag the array to unite with this one
+	 * @param bagToUnite the array to unite with this one
 	 * @return New bag as an array, else this LinkedBag is returned
 	 */
 	@Override
-	public BagInterface<T> union(BagInterface<T> bag) {
-		LinkedBag<T> result = this;
-		T[] temp = bag.toArray();
+	public BagInterface<T> union(BagInterface<T> bagToUnite) {
+		LinkedBag<T> result = new LinkedBag<T>();
+		T[] temp = bagToUnite.toArray();
 		
-		for (int index = 0; index < bag.getCurrentSize(); ++index) {
+		for (int index = 0; index < bagToUnite.getCurrentSize(); ++index) {
 			if (temp[index] != null) {
 				result.add(temp[index]);
 			}

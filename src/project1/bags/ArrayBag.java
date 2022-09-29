@@ -172,17 +172,17 @@ public class ArrayBag<T> implements BagInterface<T> {
 	/**
 	 * Union of two bags using BagInterface<T> instead of an array
 	 * Array does not need to be in order; can have empty slots anywhere
-	 * @param bag
+	 * @param bagToUnite
 	 * @return new bag if union was successful, else throw exception (Null should never be returned)
 	 */
 	@Override
-	public BagInterface<T> union(BagInterface<T> bag) {
+	public BagInterface<T> union(BagInterface<T> bagToUnite) {
 		checkIntegrity();
-		checkCapacity(bag.getCurrentSize() + this.getCurrentSize());
-		ArrayBag<T> result = this;
-		T[] temp = bag.toArray();
+		checkCapacity(bagToUnite.getCurrentSize() + this.getCurrentSize());
+		ArrayBag<T> result = new ArrayBag<T>();
+		T[] temp = bagToUnite.toArray();
 		
-		for (int index = 0; index < bag.getCurrentSize(); index++) {
+		for (int index = 0; index < bagToUnite.getCurrentSize(); index++) {
 			if (temp[index] != null) {
 				result.add(temp[index]);
 			}

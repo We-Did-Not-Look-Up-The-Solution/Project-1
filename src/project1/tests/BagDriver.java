@@ -33,6 +33,7 @@ public class BagDriver {
 		
 		System.out.println("Content of Bag1: " + Arrays.toString(bag1.toArray())); // Bag 1
 		System.out.println("Content of Bag2: " + Arrays.toString(bag2.toArray()) + "\n");
+		
 		System.out.println("Content of Linked Bag1: " + Arrays.toString(linkedbag1.toArray()));
 		System.out.println("Content of Linked Bag2: " + Arrays.toString(linkedbag2.toArray()) + "\n");
 
@@ -43,6 +44,14 @@ public class BagDriver {
 		
 		System.out.println("Result of union on Bag1: " + Arrays.toString(arrayADTBag.toArray()));
 		System.out.println("Result of union on LinkedBag1: " + Arrays.toString(linkedADTBag.toArray()));
+		
+		System.out.println("Contents of the Bags again ====================================");
+		System.out.println("Content of Bag1: " + Arrays.toString(bag1.toArray())); // Bag 1
+		System.out.println("Content of Bag2: " + Arrays.toString(bag2.toArray()) + "\n");
+		
+		System.out.println("Content of Linked Bag1: " + Arrays.toString(linkedbag1.toArray()));
+		System.out.println("Content of Linked Bag2: " + Arrays.toString(linkedbag2.toArray()) + "\n");
+		
 	}
 	
 	
