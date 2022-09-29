@@ -1,7 +1,5 @@
 package project1.bags;
 
-import java.util.Iterator;
-
 public class LinkedBag<T> implements BagInterface<T> {
 	private Node firstNode;
 	private int numberOfEntries;
