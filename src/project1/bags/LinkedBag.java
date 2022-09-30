@@ -222,7 +222,7 @@ public class LinkedBag<T> implements BagInterface<T> {
 		for (T entry : tempArr) {
 			if (intersectTarget.contains(entry)) {
 				newBag.add(entry);
-				intersectTarget.remove(entry);
+				intersectTarget.remove(entry); // <----- Modified the contents of the original bag
 			}
 		}
 		return newBag;

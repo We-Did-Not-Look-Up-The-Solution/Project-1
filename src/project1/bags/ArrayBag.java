@@ -250,7 +250,7 @@ public class ArrayBag<T> implements BagInterface<T> {
 			if (entry != null) {
 				if (givenBag.contains(entry)) {
 					newBag.add(entry);
-					givenBag.remove(entry);
+					givenBag.remove(entry); // <--- Modified the contents of the original bag
 				} 
 			}
 		}
