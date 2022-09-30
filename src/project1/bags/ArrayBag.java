@@ -181,16 +181,61 @@ public class ArrayBag<T> implements BagInterface<T> {
 		checkIntegrity();
 		checkCapacity(bagToUnite.getCurrentSize() + this.getCurrentSize());
 		ArrayBag<T> result = new ArrayBag<T>();
-		T[] temp = bagToUnite.toArray();
 		
-		for (int index = 0; index < bagToUnite.getCurrentSize(); index++) {
-			if (temp[index] != null) {
-				result.add(temp[index]);
+		// If the size of bagToUnite is >= the size of this bag, use that as the highest number of iterations for the "for-loop"
+		// This allows to add copies of both bags at the same time
+		if (bagToUnite.getCurrentSize() >= this.getCurrentSize()) {
+			for (int index = 0; index < bagToUnite.getCurrentSize(); index++) {
+				result.add(bagToUnite.toArray()[index]);
+				if (index < this.getCurrentSize() && this.toArray()[index] != null)
+					result.add(this.toArray()[index]);
+			}
+		} else { // else use the size of this bag for the highest index
+			for (int index = 0; index < this.getCurrentSize(); index++) {
+				result.add(this.toArray()[index]);
+				if (index < bagToUnite.getCurrentSize())
+					result.add(bagToUnite.toArray()[index]);
 			}
 		}
+		
 
 		return result;
 	}
+	
+	/*
+	 * PROPOSED FIX FOR INTERSECTION:
+	 * public BagInterface<T> intersection(BagInterface<T> givenBag) {
+		BagInterface<T> newBag = new ArrayBag<T>();
+		BagInterface<T> copy = new ArrayBag<T>();
+		
+		if (givenBag.getCurrentSize() >= this.getCurrentSize()) {
+			// given bag is the biggest; Make a copy of that, iterate through smallest
+			for (int index = 0; index < givenBag.getCurrentSize(); index++) {
+				copy.add(givenBag.toArray()[index]);
+			}
+			// this bag is the smallest, to reduce time, iterate through that
+ 			for (int index = 0; index < this.getCurrentSize(); index++) {
+ 				if (copy.contains(this.toArray()[index])) {
+ 					newBag.add(this.toArray()[index]);
+ 					copy.remove(this.toArray()[index]); // givenBag contents not changed
+ 				}
+ 			}
+		} else {
+			// this bag is the biggest, make a copy of it
+			for (int index = 0; index < this.getCurrentSize(); index++) {
+				copy.add(this.toArray()[index]);
+			}
+			// give bag is the smallest, to reduce time, iterate through that
+			for (int index = 0; index < givenBag.getCurrentSize(); index++) {
+ 				if (copy.contains(givenBag.toArray()[index])) {
+ 					newBag.add(givenBag.toArray()[index]);
+ 					copy.remove(givenBag.toArray()[index]);
+ 				}
+ 			}
+		}
+		return newBag;
+	}
+	 */
 	
 	
 	/**

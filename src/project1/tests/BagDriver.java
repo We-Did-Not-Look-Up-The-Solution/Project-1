@@ -45,11 +45,11 @@ public class BagDriver {
 		System.out.println("Result of union on LinkedBag1: " + Arrays.toString(linkedADTBag.toArray()));
 		System.out.println();
 		
-		arrayADTBag = bag1.intersection(bag2);
-		linkedADTBag = linkedbag1.intersection(linkedbag2);
+		// arrayADTBag = bag1.intersection(bag2);
+		// linkedADTBag = linkedbag1.intersection(linkedbag2);
 		
-		System.out.println("Result of intersection on Bag1: " + Arrays.toString(arrayADTBag.toArray()));
-		System.out.println("Result of intersection on LinkedBag1: " + Arrays.toString(linkedADTBag.toArray()));
+		// System.out.println("Result of intersection on Bag1: " + Arrays.toString(arrayADTBag.toArray()));
+		// System.out.println("Result of intersection on LinkedBag1: " + Arrays.toString(linkedADTBag.toArray()));
 		
 		System.out.println("\nContents of the Bags again ====================================");
 		System.out.println("Content of Bag1: " + Arrays.toString(bag1.toArray())); // Bag 1
