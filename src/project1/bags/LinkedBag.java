@@ -271,7 +271,35 @@ public class LinkedBag<T> implements BagInterface<T> {
 
 	@Override
 	public BagInterface<T> difference(BagInterface<T> bag) {
-		// TODO Auto-generated method stub
-		return null;
+		BagInterface<T> output = new LinkedBag<T>();
+
+		T[] bagA = this.toArray();
+		T[] bagB = bag.toArray();
+		boolean duplicates;
+
+		for(int i = 0; i < this.getCurrentSize(); i++ ){
+			duplicates = false;
+			for (int j = 0; j < bag.getCurrentSize(); j++){
+
+				if (bagA[i] == bagB[j] && bagA[i] != null && bagB[j] != null){
+					duplicates = true;
+					bagB[j]=null;
+					break;
+				}				
+			}
+
+			if (duplicates == true){
+					bagA[i]=null;
+			}
+
+			if (duplicates == false && bagA[i] != null){
+					output.add(bagA[i]);
+			}
+		}
+					
+
+
+
+		return output;
 	}
-}
+	}
