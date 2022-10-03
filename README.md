@@ -6,7 +6,7 @@ Members ========================================
 
 Richard Pacheco: 
 
-Jasmine Kann
+Jasmine Kann: kannjasmine@cpp.edu: kannjasmine
 
 Miguel Geronimo : miguelguzman@cpp.edu : CarltheSpiny
 
