@@ -159,23 +159,24 @@ public class LinkedBag<T> implements BagInterface<T> {
 	@Override
 	public BagInterface<T> union(BagInterface<T> bagToUnite) {
 		LinkedBag<T> result = new LinkedBag<T>();
-		T[] temp = bagToUnite.toArray();
+		T[] temp = bagToUnite.toArray(); // Make a copy of bagToUnite as an array
 		
-		if (bagToUnite.getCurrentSize() >= this.getCurrentSize()) {
+		if (bagToUnite.getCurrentSize() >= this.getCurrentSize()) { // Biggest bag is how many times with
+			
 			for (int index = 0; index < bagToUnite.getCurrentSize(); ++index) {
-				result.add(bagToUnite.toArray()[index]);
-				if (index < this.getCurrentSize())
+				result.add(bagToUnite.toArray()[index]); // Add a copy of bagToUnite to result
+				
+				if (index < this.getCurrentSize()) // Index must be in bounds of smallest bag
 					result.add(this.toArray()[index]);
 			}
 		} else {
 			for (int index = 0; index < this.getCurrentSize(); index++) {
-				result.add(this.toArray()[index]);
-				if (index < bagToUnite.getCurrentSize())
+				result.add(this.toArray()[index]); // Add a copy of this bag to result
+				
+				if (index < bagToUnite.getCurrentSize()) // Index must be in bounds of smallest bag
 					result.add(bagToUnite.toArray()[index]);
 			}
 		}
-		
-		
 		return result;
 	}
 	

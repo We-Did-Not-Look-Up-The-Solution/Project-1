@@ -178,27 +178,28 @@ public class ArrayBag<T> implements BagInterface<T> {
 	 */
 	@Override
 	public BagInterface<T> union(BagInterface<T> bagToUnite) {
-		checkIntegrity();
-		checkCapacity(bagToUnite.getCurrentSize() + this.getCurrentSize());
-		ArrayBag<T> result = new ArrayBag<T>();
+		checkIntegrity(); // Verify Integrity
+		checkCapacity(bagToUnite.getCurrentSize() + this.getCurrentSize()); // Check Cap for total length
+		ArrayBag<T> result = new ArrayBag<T>(); // Make a new empty bag of this type
 		
 		// If the size of bagToUnite is >= the size of this bag, use that as the highest number of iterations for the "for-loop"
-		// This allows to add copies of both bags at the same time
+		// This allows to add copies of both bags in paralell
 		if (bagToUnite.getCurrentSize() >= this.getCurrentSize()) {
+			
 			for (int index = 0; index < bagToUnite.getCurrentSize(); index++) {
-				result.add(bagToUnite.toArray()[index]);
-				if (index < this.getCurrentSize() && this.toArray()[index] != null)
+				result.add(bagToUnite.toArray()[index]); // Add a copy of bagToUnite to result
+				
+				if (index < this.getCurrentSize()) // Index must be in bounds of smallest bag
 					result.add(this.toArray()[index]);
 			}
 		} else { // else use the size of this bag for the highest index
 			for (int index = 0; index < this.getCurrentSize(); index++) {
-				result.add(this.toArray()[index]);
-				if (index < bagToUnite.getCurrentSize())
+				result.add(this.toArray()[index]); // Add a copy of this bag to result
+				
+				if (index < bagToUnite.getCurrentSize()) // Index must be in bounds of smallest bag
 					result.add(bagToUnite.toArray()[index]);
 			}
 		}
-		
-
 		return result;
 	}
 	
