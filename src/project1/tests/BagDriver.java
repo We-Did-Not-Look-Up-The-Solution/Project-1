@@ -40,6 +40,12 @@ public class BagDriver {
 
 		BagInterface<String> arrayADTBag = bag1.union(bag2); // Perform Union on Bag 
 		BagInterface<String> linkedADTBag = linkedbag1.union(linkedbag2); // Perform union on Linked Bag
+
+		BagInterface<String> arrayDifferenceBag1 = bag1.difference(bag2); //Perform Difference on Array Bag 1
+		BagInterface<String> arrayDifferenceBag2 = bag2.difference(bag1); //Perform Difference on Array Bag 2
+
+		BagInterface<String> linkedDifferenceBag1 = bag1.difference(bag2); //Perform Difference on Array Bag 1
+		BagInterface<String> linkedDifferenceBag2 = bag2.difference(bag1); //Perform Difference on Array Bag 2
 		
 		System.out.println("Result of union on Bag1: " + Arrays.toString(arrayADTBag.toArray()));
 		System.out.println("Result of union on LinkedBag1: " + Arrays.toString(linkedADTBag.toArray()));
@@ -57,6 +63,12 @@ public class BagDriver {
 		
 		System.out.println("Content of Linked Bag1: " + Arrays.toString(linkedbag1.toArray()));
 		System.out.println("Content of Linked Bag2: " + Arrays.toString(linkedbag2.toArray()) + "\n");
+
+		System.out.println("Result of difference on Array Bag1: " + Arrays.toString(arrayDifferenceBag1.toArray()));
+		System.out.println("Result of difference on Array Bag2: " + Arrays.toString(arrayDifferenceBag2.toArray()));
+
+		System.out.println("Result of difference on Linked Bag1: " + Arrays.toString(linkedDifferenceBag1.toArray()));
+		System.out.println("Result of difference on Linked Bag2: " + Arrays.toString(linkedDifferenceBag2.toArray()));
 		
 	}
 	
