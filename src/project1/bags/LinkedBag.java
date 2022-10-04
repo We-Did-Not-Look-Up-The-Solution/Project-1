@@ -272,16 +272,20 @@ public class LinkedBag<T> implements BagInterface<T> {
 
 	@Override
 	public BagInterface<T> difference(BagInterface<T> bag) {
+		//creates new bag
 		BagInterface<T> output = new LinkedBag<T>();
 
+		//turns bags into an array
 		T[] bagA = this.toArray();
 		T[] bagB = bag.toArray();
 		boolean duplicates;
 
+		//iterates through both bags
 		for(int i = 0; i < this.getCurrentSize(); i++ ){
 			duplicates = false;
 			for (int j = 0; j < bag.getCurrentSize(); j++){
 
+				//if the content is the same and it is not equal to null, then set duplicate to true and set whatever is in bagB to null
 				if (bagA[i] == bagB[j] && bagA[i] != null && bagB[j] != null){
 					duplicates = true;
 					bagB[j]=null;
@@ -289,10 +293,12 @@ public class LinkedBag<T> implements BagInterface<T> {
 				}				
 			}
 
+			//if duplicates is equal to true then set whatever is in BagA to null
 			if (duplicates == true){
 					bagA[i]=null;
 			}
 
+			//if duplicates is still false and bagA is not equal then add the content
 			if (duplicates == false && bagA[i] != null){
 					output.add(bagA[i]);
 			}
