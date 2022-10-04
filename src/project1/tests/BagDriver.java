@@ -64,6 +64,7 @@ public class BagDriver {
 		System.out.println("Result of difference on Linked Bag2 with Linked Bag1: " + Arrays.toString(linkedDifferenceBag2.toArray()));
 		
 		System.out.println("\nContents of the Bags again ====================================");
+		
 		System.out.println("Content of Bag1: " + Arrays.toString(bag1.toArray())); // Bag 1
 		System.out.println("Content of Bag2: " + Arrays.toString(bag2.toArray()) + "\n");
 		

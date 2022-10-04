@@ -187,10 +187,12 @@ public class ArrayBag<T> implements BagInterface<T> {
 		if (bagToUnite.getCurrentSize() >= this.getCurrentSize()) {
 			
 			for (int index = 0; index < bagToUnite.getCurrentSize(); index++) {
-				result.add(bagToUnite.toArray()[index]); // Add a copy of bagToUnite to result
+				if (bagToUnite.toArray()[index] != null)
+					result.add(bagToUnite.toArray()[index]); // Add a copy of bagToUnite to result
 				
 				if (index < this.getCurrentSize()) // Index must be in bounds of smallest bag
-					result.add(this.toArray()[index]);
+					if (this.toArray()[index] != null)
+						result.add(this.toArray()[index]);
 			}
 		} else { // else use the size of this bag for the highest index
 			for (int index = 0; index < this.getCurrentSize(); index++) {
