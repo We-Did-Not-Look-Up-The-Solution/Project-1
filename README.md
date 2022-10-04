@@ -10,6 +10,8 @@ Jasmine Kann: kannjasmine@cpp.edu: kannjasmine
 
 Miguel Geronimo : miguelguzman@cpp.edu : CarltheSpiny
 
+Video Link: https://youtu.be/7Ih03XTKnMw
+
 Credits =======================================
 
 *Discord and Communication: Richard & Jasmine
