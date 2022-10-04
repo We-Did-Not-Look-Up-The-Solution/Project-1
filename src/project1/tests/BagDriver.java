@@ -8,7 +8,7 @@ import project1.bags.LinkedBag;
 
 /**
  * Tests and Runs the LinkedBag and ArrayBag Tests
- * @author 
+ * @author everyone
  *
  */
 public class BagDriver {

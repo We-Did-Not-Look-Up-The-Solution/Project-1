@@ -1,9 +1,22 @@
 package project1.bags;
 
+/**
+	A class of bags whose entries are stored in a chain of linked nodes.
+	The bag is never full.
+	@author Frank M. Carrano, Timothy M. Henry
+	@version 5.0
+*/
 public class LinkedBag<T> implements BagInterface<T> {
 	private Node firstNode;
 	private int numberOfEntries;
+<<<<<<< Updated upstream
 
+=======
+	
+	/**
+	 * Default Constructor. Sets firstNode as null.
+	 */
+>>>>>>> Stashed changes
 	public LinkedBag() {
 		firstNode = null;
 		numberOfEntries = 0;
@@ -80,7 +93,16 @@ public class LinkedBag<T> implements BagInterface<T> {
 		}
 		return result;
 	} // end remove
+<<<<<<< Updated upstream
 
+=======
+	
+	/**
+	 * Gets the node that this node is refrencing to
+	 * @param anEntry The node to get a refrence from
+	 * @return The node being refrenced
+	 */
+>>>>>>> Stashed changes
 	public Node getRefrenceTo(T anEntry) {
 		boolean found = false;
 		Node currentNode = firstNode;
@@ -153,10 +175,11 @@ public class LinkedBag<T> implements BagInterface<T> {
 			else
 				currentNode = currentNode.getNextNode();
 		} // End while
-		return found; // STUB
+		return found;
 	} // End contains
 
 	/**
+<<<<<<< Updated upstream
 	 * Unites 2 LinkedBags together using Arrays
 	 * Array does need to be in order; Can have null/empty spots
 	 * 
@@ -176,6 +199,9 @@ public class LinkedBag<T> implements BagInterface<T> {
 
 	/**
 	 * Unites 2 LinkedBags together using BagInterface
+=======
+	 * Unites bags together
+>>>>>>> Stashed changes
 	 * Array does need to be in order; Can have null/empty spots
 	 * 
 	 * @param bagToUnite the array to unite with this one
@@ -189,10 +215,15 @@ public class LinkedBag<T> implements BagInterface<T> {
 		if (bagToUnite.getCurrentSize() >= this.getCurrentSize()) { // Biggest bag is how many times with
 
 			for (int index = 0; index < bagToUnite.getCurrentSize(); ++index) {
+<<<<<<< Updated upstream
 				result.add(bagToUnite.toArray()[index]); // Add a copy of bagToUnite to result
 
+=======
+				result.add(temp[index]); // Add a copy of bagToUnite to result
+				
+>>>>>>> Stashed changes
 				if (index < this.getCurrentSize()) // Index must be in bounds of smallest bag
-					result.add(this.toArray()[index]);
+					result.add(temp[index]);
 			}
 		} else {
 			for (int index = 0; index < this.getCurrentSize(); index++) {
@@ -228,7 +259,36 @@ public class LinkedBag<T> implements BagInterface<T> {
 
 		return newBag;
 	}
+	
+	@Override
+	public BagInterface<T> difference(BagInterface<T> bag) {
+		BagInterface<T> output = new LinkedBag<T>();
 
+		T[] bagA = this.toArray();
+		T[] bagB = bag.toArray();
+		boolean duplicates;
+
+		for(int i = 0; i < this.getCurrentSize(); i++ ){
+			duplicates = false;
+			for (int j = 0; j < bag.getCurrentSize(); j++){
+
+				if (bagA[i] == bagB[j] && bagA[i] != null && bagB[j] != null){
+					duplicates = true;
+					bagB[j]=null;
+					break;
+				}				
+			}
+
+			if (duplicates == true){
+					bagA[i]=null;
+			}
+
+			if (duplicates == false && bagA[i] != null){
+					output.add(bagA[i]);
+			}
+		}
+
+<<<<<<< Updated upstream
 	// public BagInterface<T> intersection(BagInterface<T> intersectTarget) {
 	// T[] tempArr = toArray();
 	// BagInterface<T> newBag = new LinkedBag<T>();
@@ -246,8 +306,12 @@ public class LinkedBag<T> implements BagInterface<T> {
 	public T[] difference(T[] differenceTarget) {
 		// TODO Auto-generated method stub
 		return null;
+=======
+		return output;
+>>>>>>> Stashed changes
 	}
 
+	/** Node */
 	class Node {
 		private T data;
 		private Node next;
@@ -278,6 +342,7 @@ public class LinkedBag<T> implements BagInterface<T> {
 			next = nextNode;
 		}
 	}
+<<<<<<< Updated upstream
 
 	@Override
 	public boolean isFull() {
@@ -322,3 +387,6 @@ public class LinkedBag<T> implements BagInterface<T> {
 		return output;
 	}
 }
+=======
+	}
+>>>>>>> Stashed changes
