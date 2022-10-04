@@ -6,9 +6,18 @@ import project1.bags.ArrayBag;
 import project1.bags.BagInterface;
 import project1.bags.LinkedBag;
 
+/**
+ * Tests and Runs the LinkedBag and ArrayBag Tests
+ * @author 
+ *
+ */
 public class BagDriver {
 
-	
+	/**
+	 * Creates instances of ArrayBag and LinkedBag, then executes union, difference, and intersection on them.
+	 * Outputs results to the console
+	 * @param args arguments
+	 */
 	public static void main(String[] args) {
 		ArrayBag<String>bag1= new ArrayBag<String>();
 		bag1.add("a");
