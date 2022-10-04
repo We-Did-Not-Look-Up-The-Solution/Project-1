@@ -218,10 +218,11 @@ public class LinkedBag<T> implements BagInterface<T> {
 		T[] myArrayCopy = this.toArray();
 		T[] givenArrayCopy = intersectTarget.toArray();
 
-		for (int index = 0; index < this.getCurrentSize(); index++) {
-			for (T element : givenArrayCopy) {
-				if (myArrayCopy[index].equals(element))
-					newBag.add(element);
+		for (int myIndex = 0; myIndex < this.getCurrentSize(); myIndex++) {
+			for (int givenIndex = 0; givenIndex < intersectTarget.getCurrentSize(); givenIndex++) {
+				if (myArrayCopy[myIndex].equals(givenArrayCopy[givenIndex]))
+					newBag.add(myArrayCopy[myIndex]);
+				givenArrayCopy[givenIndex] = null;
 			}
 
 		}

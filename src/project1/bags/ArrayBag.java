@@ -239,10 +239,11 @@ public class ArrayBag<T> implements BagInterface<T> {
 		T[] givenArrayCopy = givenBag.toArray();
 		T[] myArrayCopy = this.toArray();
 
-		for (int index = 0; index < this.getCurrentSize(); index++) {
-			for (T element : givenArrayCopy) {
-				if (myArrayCopy[index].equals(element))
-					newBag.add(element);
+		for (int myIndex = 0; myIndex < this.getCurrentSize(); myIndex++) {
+			for (int givenIndex = 0; givenIndex < givenBag.getCurrentSize(); givenIndex++) {
+				if (myArrayCopy[myIndex].equals(givenArrayCopy[givenIndex]))
+					newBag.add(myArrayCopy[myIndex]);
+				givenArrayCopy[givenIndex] = null;
 			}
 		}
 		return newBag;
