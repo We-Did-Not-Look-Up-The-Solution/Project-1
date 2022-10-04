@@ -178,21 +178,68 @@ public class LinkedBag<T> implements BagInterface<T> {
 	 * Unites 2 LinkedBags together using BagInterface
 	 * Array does need to be in order; Can have null/empty spots
 	 * 
-	 * @param bag the array to unite with this one
+	 * @param bagToUnite the array to unite with this one
 	 * @return New bag as an array, else this LinkedBag is returned
 	 */
 	@Override
-	public BagInterface<T> union(BagInterface<T> bag) {
-		LinkedBag<T> result = this;
-		T[] temp = bag.toArray();
+	public BagInterface<T> union(BagInterface<T> bagToUnite) {
+		LinkedBag<T> result = new LinkedBag<T>();
+		T[] temp = bagToUnite.toArray(); // Make a copy of bagToUnite as an array
 
-		for (int index = 0; index < bag.getCurrentSize(); ++index) {
-			if (temp[index] != null) {
-				result.add(temp[index]);
+		if (bagToUnite.getCurrentSize() >= this.getCurrentSize()) { // Biggest bag is how many times with
+
+			for (int index = 0; index < bagToUnite.getCurrentSize(); ++index) {
+				result.add(bagToUnite.toArray()[index]); // Add a copy of bagToUnite to result
+
+				if (index < this.getCurrentSize()) // Index must be in bounds of smallest bag
+					result.add(this.toArray()[index]);
+			}
+		} else {
+			for (int index = 0; index < this.getCurrentSize(); index++) {
+				result.add(this.toArray()[index]); // Add a copy of this bag to result
+
+				if (index < bagToUnite.getCurrentSize()) // Index must be in bounds of smallest bag
+					result.add(bagToUnite.toArray()[index]);
 			}
 		}
 		return result;
 	}
+
+	/*
+	 * PROPOSED FIX FOR INTERSECTION:
+	 * public BagInterface<T> intersection(BagInterface<T> intersectTarget) {
+	 * BagInterface<T> copy = new LinkedBag<T>();
+	 * BagInterface<T> newBag = new LinkedBag<T>();
+	 * 
+	 * if (intersectTarget.getCurrentSize() >= this.getCurrentSize()) {
+	 * // given bag is the biggest; Make a copy of that, iterate through smallest
+	 * for (int index = 0; index < intersectTarget.getCurrentSize(); index++) {
+	 * copy.add(intersectTarget.toArray()[index]);
+	 * }
+	 * // this bag is the smallest, to reduce time, iterate through that
+	 * for (int index = 0; index < this.getCurrentSize(); index++) {
+	 * if (copy.contains(this.toArray()[index])) {
+	 * newBag.add(this.toArray()[index]);
+	 * copy.remove(this.toArray()[index]); // givenBag contents not changed
+	 * }
+	 * }
+	 * } else {
+	 * // this bag is the biggest, make a copy of it
+	 * for (int index = 0; index < this.getCurrentSize(); index++) {
+	 * copy.add(this.toArray()[index]);
+	 * }
+	 * // give bag is the smallest, to reduce time, iterate through that
+	 * for (int index = 0; index < intersectTarget.getCurrentSize(); index++) {
+	 * if (copy.contains(intersectTarget.toArray()[index])) {
+	 * newBag.add(intersectTarget.toArray()[index]);
+	 * copy.remove(intersectTarget.toArray()[index]);
+	 * }
+	 * }
+	 * }
+	 * 
+	 * return newBag;
+	 * }
+	 */
 
 	public BagInterface<T> intersection(BagInterface<T> intersectTarget) {
 		T[] tempArr = toArray();
@@ -201,7 +248,7 @@ public class LinkedBag<T> implements BagInterface<T> {
 		for (T entry : tempArr) {
 			if (intersectTarget.contains(entry)) {
 				newBag.add(entry);
-				intersectTarget.remove(entry);
+				intersectTarget.remove(entry); // <----- Modified the contents of the original bag
 			}
 		}
 		return newBag;
@@ -248,15 +295,41 @@ public class LinkedBag<T> implements BagInterface<T> {
 		throw new UnsupportedOperationException("Method not supported");
 	}
 
-	// @Override
-	// public BagInterface<T> intersection(BagInterface<T> bag) {
-	// // TODO Auto-generated method stub
-	// return null;
-	// }
-
 	@Override
 	public BagInterface<T> difference(BagInterface<T> bag) {
-		// TODO Auto-generated method stub
-		return null;
+		// creates new bag
+		BagInterface<T> output = new LinkedBag<T>();
+
+		// turns bags into an array
+		T[] bagA = this.toArray();
+		T[] bagB = bag.toArray();
+		boolean duplicates;
+
+		// iterates through both bags
+		for (int i = 0; i < this.getCurrentSize(); i++) {
+			duplicates = false;
+			for (int j = 0; j < bag.getCurrentSize(); j++) {
+
+				// if the content is the same and it is not equal to null, then set duplicate to
+				// true and set whatever is in bagB to null
+				if (bagA[i] == bagB[j] && bagA[i] != null && bagB[j] != null) {
+					duplicates = true;
+					bagB[j] = null;
+					break;
+				}
+			}
+
+			// if duplicates is equal to true then set whatever is in BagA to null
+			if (duplicates == true) {
+				bagA[i] = null;
+			}
+
+			// if duplicates is still false and bagA is not equal then add the content
+			if (duplicates == false && bagA[i] != null) {
+				output.add(bagA[i]);
+			}
+		}
+
+		return output;
 	}
 }
