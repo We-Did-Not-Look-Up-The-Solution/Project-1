@@ -187,25 +187,29 @@ public class ArrayBag<T> implements BagInterface<T> {
 	}
 
 	/**
-	 * Union of two bags of the type BagInterface<T>. Does not modify the contents of the original bag.
+	 * Union of two bags of the type BagInterface<T>. Does not modify the contents
+	 * of the original bag.
 	 * Array does not need to be in order; can have empty slots anywhere
+	 * 
 	 * @param bagToUnite
-	 * @return new bag if union was successful, else throw exception (Null should never be returned)
+	 * @return new bag if union was successful, else throw exception (Null should
+	 *         never be returned)
 	 */
 	@Override
 	public BagInterface<T> union(BagInterface<T> bagToUnite) {
 		checkIntegrity(); // Verify Integrity
 		checkCapacity(bagToUnite.getCurrentSize() + this.getCurrentSize()); // Check Cap for total length
 		ArrayBag<T> result = new ArrayBag<T>(); // Make a new empty bag of this type
-		
-		// If the size of bagToUnite is >= the size of this bag, use that as the highest number of iterations for the "for-loop"
+
+		// If the size of bagToUnite is >= the size of this bag, use that as the highest
+		// number of iterations for the "for-loop"
 		// This allows to add copies of both bags in paralell
 		if (bagToUnite.getCurrentSize() >= this.getCurrentSize()) {
-			
+
 			for (int index = 0; index < bagToUnite.getCurrentSize(); index++) {
 				if (bagToUnite.toArray()[index] != null)
 					result.add(bagToUnite.toArray()[index]); // Add a copy of bagToUnite to result
-				
+
 				if (index < this.getCurrentSize()) // Index must be in bounds of smallest bag
 					if (this.toArray()[index] != null)
 						result.add(this.toArray()[index]);
@@ -213,72 +217,32 @@ public class ArrayBag<T> implements BagInterface<T> {
 		} else { // else use the size of this bag for the highest index
 			for (int index = 0; index < this.getCurrentSize(); index++) {
 				result.add(this.toArray()[index]); // Add a copy of this bag to result
-				
+
 				if (index < bagToUnite.getCurrentSize()) // Index must be in bounds of smallest bag
 					result.add(bagToUnite.toArray()[index]);
 			}
-		} else { // else use the size of this bag for the highest index
-			for (int index = 0; index < this.getCurrentSize(); index++) {
-				result.add(this.toArray()[index]); // Add a copy of this bag to result
-				
-				if (index < bagToUnite.getCurrentSize()) // Index must be in bounds of smallest bag
-					result.add(bagToUnite.toArray()[index]);
->>>>>>> 2a7ceaaa0e4896921902dfd4ba3ba259f5b6228b
 		}
 		return result;
 	}
-
-	/*
-	 * PROPOSED FIX FOR INTERSECTION:
-	 * public BagInterface<T> intersection(BagInterface<T> givenBag) {
-	 * BagInterface<T> newBag = new ArrayBag<T>();
-	 * BagInterface<T> copy = new ArrayBag<T>();
-	 * 
-	 * if (givenBag.getCurrentSize() >= this.getCurrentSize()) {
-	 * // given bag is the biggest; Make a copy of that, iterate through smallest
-	 * for (int index = 0; index < givenBag.getCurrentSize(); index++) {
-	 * copy.add(givenBag.toArray()[index]);
-	 * }
-	 * // this bag is the smallest, to reduce time, iterate through that
-	 * for (int index = 0; index < this.getCurrentSize(); index++) {
-	 * if (copy.contains(this.toArray()[index])) {
-	 * newBag.add(this.toArray()[index]);
-	 * copy.remove(this.toArray()[index]); // givenBag contents not changed
-	 * }
-	 * }
-	 * } else {
-	 * // this bag is the biggest, make a copy of it
-	 * for (int index = 0; index < this.getCurrentSize(); index++) {
-	 * copy.add(this.toArray()[index]);
-	 * }
-	 * // give bag is the smallest, to reduce time, iterate through that
-	 * for (int index = 0; index < givenBag.getCurrentSize(); index++) {
-	 * if (copy.contains(givenBag.toArray()[index])) {
-	 * newBag.add(givenBag.toArray()[index]);
-	 * copy.remove(givenBag.toArray()[index]);
-	 * }
-	 * }
-	 * }
-	 * return newBag;
-	 * }
-	 */
 
 	/**
 	 * Returns a bag containing all items found in both bags, of the type
 	 * BagInterface<T>.
 	 * Does not modify the original bag.
 	 * 
-	 * @author
+	 * @author Richard Pacheco
+	 * @param givenBag the bag to combine T elements with
 	 * @return new bag with intersection performed on it
 	 */
 	public BagInterface<T> intersection(BagInterface<T> givenBag) {
 		BagInterface<T> newBag = new ArrayBag<T>();
-		for (T entry : bag) {
-			if (entry != null) {
-				if (givenBag.contains(entry)) {
-					newBag.add(entry);
-					givenBag.remove(entry); // <--- Modified the contents of the original bag
-				}
+		T[] givenArrayCopy = givenBag.toArray();
+		T[] myArrayCopy = this.toArray();
+
+		for (int index = 0; index < this.getCurrentSize(); index++) {
+			for (T element : givenArrayCopy) {
+				if (myArrayCopy[index].equals(element))
+					newBag.add(element);
 			}
 		}
 		return newBag;

@@ -205,54 +205,43 @@ public class LinkedBag<T> implements BagInterface<T> {
 		return result;
 	}
 
-	/*
-	 * PROPOSED FIX FOR INTERSECTION:
-	 * public BagInterface<T> intersection(BagInterface<T> intersectTarget) {
-	 * BagInterface<T> copy = new LinkedBag<T>();
-	 * BagInterface<T> newBag = new LinkedBag<T>();
+	/**
+	 * Finds all common elements between two bags and returns them in a new bag.
 	 * 
-	 * if (intersectTarget.getCurrentSize() >= this.getCurrentSize()) {
-	 * // given bag is the biggest; Make a copy of that, iterate through smallest
-	 * for (int index = 0; index < intersectTarget.getCurrentSize(); index++) {
-	 * copy.add(intersectTarget.toArray()[index]);
-	 * }
-	 * // this bag is the smallest, to reduce time, iterate through that
-	 * for (int index = 0; index < this.getCurrentSize(); index++) {
-	 * if (copy.contains(this.toArray()[index])) {
-	 * newBag.add(this.toArray()[index]);
-	 * copy.remove(this.toArray()[index]); // givenBag contents not changed
-	 * }
-	 * }
-	 * } else {
-	 * // this bag is the biggest, make a copy of it
-	 * for (int index = 0; index < this.getCurrentSize(); index++) {
-	 * copy.add(this.toArray()[index]);
-	 * }
-	 * // give bag is the smallest, to reduce time, iterate through that
-	 * for (int index = 0; index < intersectTarget.getCurrentSize(); index++) {
-	 * if (copy.contains(intersectTarget.toArray()[index])) {
-	 * newBag.add(intersectTarget.toArray()[index]);
-	 * copy.remove(intersectTarget.toArray()[index]);
-	 * }
-	 * }
-	 * }
+	 * @author Richard Pacheco
+	 * @param intersectTarget the bag to combine find common values with
+	 * @return the intersection of the two bags in LinkedBag form
 	 * 
-	 * return newBag;
-	 * }
 	 */
-
 	public BagInterface<T> intersection(BagInterface<T> intersectTarget) {
-		T[] tempArr = toArray();
 		BagInterface<T> newBag = new LinkedBag<T>();
+		T[] myArrayCopy = this.toArray();
+		T[] givenArrayCopy = intersectTarget.toArray();
 
-		for (T entry : tempArr) {
-			if (intersectTarget.contains(entry)) {
-				newBag.add(entry);
-				intersectTarget.remove(entry); // <----- Modified the contents of the original bag
+		for (int index = 0; index < this.getCurrentSize(); index++) {
+			for (T element : givenArrayCopy) {
+				if (myArrayCopy[index].equals(element))
+					newBag.add(element);
 			}
+
 		}
+
 		return newBag;
 	}
+
+	// public BagInterface<T> intersection(BagInterface<T> intersectTarget) {
+	// T[] tempArr = toArray();
+	// BagInterface<T> newBag = new LinkedBag<T>();
+
+	// for (T entry : tempArr) {
+	// if (intersectTarget.contains(entry)) {
+	// newBag.add(entry);
+	// intersectTarget.remove(entry); // <----- Modified the contents of the
+	// original bag
+	// }
+	// }
+	// return newBag;
+	// }
 
 	public T[] difference(T[] differenceTarget) {
 		// TODO Auto-generated method stub
