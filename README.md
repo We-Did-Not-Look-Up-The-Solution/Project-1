@@ -26,8 +26,8 @@ Credits =======================================
 
 *BagDriver Design: Jasmine & Miguel
 
-*Unit Test Framework Implementation:
+*Unit Test Framework Implementation: Miguel
 
 Extra Features ==============================
 
-Unit Test (Pending)
+Unit Test with Junit
