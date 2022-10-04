@@ -208,6 +208,7 @@ public class LinkedBag<T> implements BagInterface<T> {
 	/**
 	 * Finds all common elements between two bags and returns them in a new bag.
 	 * 
+	 * @author Richard Pacheco
 	 * @param intersectTarget the bag to combine find common values with
 	 * @return the intersection of the two bags in LinkedBag form
 	 * 
