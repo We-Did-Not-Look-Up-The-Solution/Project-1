@@ -9,14 +9,10 @@ package project1.bags;
 public class LinkedBag<T> implements BagInterface<T> {
 	private Node firstNode;
 	private int numberOfEntries;
-<<<<<<< Updated upstream
-
-=======
 	
 	/**
 	 * Default Constructor. Sets firstNode as null.
 	 */
->>>>>>> Stashed changes
 	public LinkedBag() {
 		firstNode = null;
 		numberOfEntries = 0;
@@ -93,16 +89,11 @@ public class LinkedBag<T> implements BagInterface<T> {
 		}
 		return result;
 	} // end remove
-<<<<<<< Updated upstream
-
-=======
-	
 	/**
 	 * Gets the node that this node is refrencing to
 	 * @param anEntry The node to get a refrence from
 	 * @return The node being refrenced
 	 */
->>>>>>> Stashed changes
 	public Node getRefrenceTo(T anEntry) {
 		boolean found = false;
 		Node currentNode = firstNode;
@@ -179,29 +170,7 @@ public class LinkedBag<T> implements BagInterface<T> {
 	} // End contains
 
 	/**
-<<<<<<< Updated upstream
-	 * Unites 2 LinkedBags together using Arrays
-	 * Array does need to be in order; Can have null/empty spots
-	 * 
-	 * @param unionTarget the array to unite with this one
-	 * @return New bag as an array, else this LinkedBag is returned
-	 *
-	 *         public T[] union(T[] unionTarget) {
-	 *         LinkedBag<T> result = this;
-	 * 
-	 *         for (int index = 0; index < unionTarget.getCurrentSize(); index++) {
-	 *         if (unionTarget[index] != null)
-	 *         result.add(unionTarget[index]);
-	 *         }
-	 *         return result.toArray();
-	 *         }
-	 */
-
-	/**
-	 * Unites 2 LinkedBags together using BagInterface
-=======
 	 * Unites bags together
->>>>>>> Stashed changes
 	 * Array does need to be in order; Can have null/empty spots
 	 * 
 	 * @param bagToUnite the array to unite with this one
@@ -215,13 +184,8 @@ public class LinkedBag<T> implements BagInterface<T> {
 		if (bagToUnite.getCurrentSize() >= this.getCurrentSize()) { // Biggest bag is how many times with
 
 			for (int index = 0; index < bagToUnite.getCurrentSize(); ++index) {
-<<<<<<< Updated upstream
-				result.add(bagToUnite.toArray()[index]); // Add a copy of bagToUnite to result
-
-=======
 				result.add(temp[index]); // Add a copy of bagToUnite to result
 				
->>>>>>> Stashed changes
 				if (index < this.getCurrentSize()) // Index must be in bounds of smallest bag
 					result.add(temp[index]);
 			}
@@ -287,28 +251,7 @@ public class LinkedBag<T> implements BagInterface<T> {
 					output.add(bagA[i]);
 			}
 		}
-
-<<<<<<< Updated upstream
-	// public BagInterface<T> intersection(BagInterface<T> intersectTarget) {
-	// T[] tempArr = toArray();
-	// BagInterface<T> newBag = new LinkedBag<T>();
-
-	// for (T entry : tempArr) {
-	// if (intersectTarget.contains(entry)) {
-	// newBag.add(entry);
-	// intersectTarget.remove(entry); // <----- Modified the contents of the
-	// original bag
-	// }
-	// }
-	// return newBag;
-	// }
-
-	public T[] difference(T[] differenceTarget) {
-		// TODO Auto-generated method stub
-		return null;
-=======
 		return output;
->>>>>>> Stashed changes
 	}
 
 	/** Node */
@@ -342,51 +285,4 @@ public class LinkedBag<T> implements BagInterface<T> {
 			next = nextNode;
 		}
 	}
-<<<<<<< Updated upstream
-
-	@Override
-	public boolean isFull() {
-		throw new UnsupportedOperationException("Method not supported");
-	}
-
-	@Override
-	public BagInterface<T> difference(BagInterface<T> bag) {
-		// creates new bag
-		BagInterface<T> output = new LinkedBag<T>();
-
-		// turns bags into an array
-		T[] bagA = this.toArray();
-		T[] bagB = bag.toArray();
-		boolean duplicates;
-
-		// iterates through both bags
-		for (int i = 0; i < this.getCurrentSize(); i++) {
-			duplicates = false;
-			for (int j = 0; j < bag.getCurrentSize(); j++) {
-
-				// if the content is the same and it is not equal to null, then set duplicate to
-				// true and set whatever is in bagB to null
-				if (bagA[i] == bagB[j] && bagA[i] != null && bagB[j] != null) {
-					duplicates = true;
-					bagB[j] = null;
-					break;
-				}
-			}
-
-			// if duplicates is equal to true then set whatever is in BagA to null
-			if (duplicates == true) {
-				bagA[i] = null;
-			}
-
-			// if duplicates is still false and bagA is not equal then add the content
-			if (duplicates == false && bagA[i] != null) {
-				output.add(bagA[i]);
-			}
-		}
-
-		return output;
-	}
 }
-=======
-	}
->>>>>>> Stashed changes
